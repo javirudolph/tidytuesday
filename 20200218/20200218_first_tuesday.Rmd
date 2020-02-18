@@ -6,8 +6,9 @@ output: github_document
 ---
 
 
+
 # Get the Data
-```{r}
+```{r message = FALSE}
 
 food_consumption <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv')
 
@@ -16,7 +17,7 @@ food_consumption <- readr::read_csv('https://raw.githubusercontent.com/rfordatas
 
 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # Load the libraries and if you don't have them installed yet
 # install.packages('tidyverse')
 library(tidyverse)
@@ -34,4 +35,6 @@ food_consumption %>%
 
 ```
 
- How many countries do we have?
+How many countries do we have? The data shows we have `r length(unique(food_consumption$country))` countries and `r length(unique(food_consumption$food_category))` food categories.
+
+
