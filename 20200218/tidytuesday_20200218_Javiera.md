@@ -25,12 +25,7 @@ food_consumption %>%
   guides(color = guide_legend(title = "Food"))
 ```
 
-![](20200218_first_tuesday_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-
-``` r
-  #scale_color_viridis_d() +
-  #guide_legend(color = "Food") +
-```
+![](tidytuesday_20200218_Javiera_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 How many countries do we have? The data shows we have 130 countries and
 11 food categories.

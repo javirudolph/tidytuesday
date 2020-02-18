@@ -33,8 +33,6 @@ food_consumption %>%
   geom_point(size = 3, alpha = 0.6) +
   theme_classic() +
   guides(color = guide_legend(title = "Food"))
-  #scale_color_viridis_d() +
-  #guide_legend(color = "Food") +
 
 ```
 
