@@ -17,4 +17,4 @@ food_consumption %>%
        y = "CO2 emmission") +
   theme(legend.position = "bottom")
 
-ggsave("20200218/tidytues-javi-2020-02-18.png")
+ggsave("20200218/tidytues-javi-2020-02-18.png", height = 3, width = 5)
