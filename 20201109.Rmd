@@ -68,7 +68,8 @@ ikea.csv %>%
 
 ikea.csv %>% 
   ggplot(., aes(y = category, x = price)) +
-  geom_boxplot() +
+  # geom_boxplot() + 
+  # not liking the boxplot
   geom_point(alpha = 0.2, size = 1, aes(color = sellable_online)) +
   geom_point(data = ikea.csv %>% 
                group_by(category) %>% 
