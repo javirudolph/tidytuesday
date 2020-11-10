@@ -1,0 +1,83 @@
+---
+title: "TidyTuesday November 9, 2020"
+author: "Javi Rudolph"
+date: "11/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 14, fig.height = 10)
+```
+
+```{r}
+# Load libraries
+library(tidytuesdayR)
+library(devtools)
+library(ggplot2)
+library(dplyr)
+
+# Rladies GNV challenge: use the maize color palette
+# https://github.com/AndiKur4/MaizePal
+
+devtools::install_github("AndiKur4/MaizePal")
+
+library(MaizePal)
+
+# Load data
+#tuesdata <- tidytuesdayR::tt_load('2020-11-03')
+tuesdata <- tidytuesdayR::tt_load(2020, week = 45)
+
+ikea.csv <- tuesdata$ikea
+```
+
+```{r}
+# I'm interested in exploring the price of different items grouped by categories:
+
+ikea.csv %>% 
+  ggplot(., aes(y = category, x = price)) +
+  geom_boxplot() +
+  geom_point(alpha = 0.2, size = 1) +
+  labs(x = "Price in USD",
+       y = "Furniture Category",
+       title = "Ikea furniture prices by category") +
+  theme_bw()
+
+```
+
+
+```{r}
+# Now, I would like to include the average price for each category of furniture:
+ikea.csv %>% 
+  ggplot(., aes(y = category, x = price)) +
+  geom_boxplot() +
+  geom_point(alpha = 0.2, size = 1) +
+  geom_point(data = ikea.csv %>% 
+               group_by(category) %>% 
+               summarise(avg_price = mean(price)), 
+             aes(y = category, x = avg_price), color = "red") + 
+  labs(x = "Price in USD",
+       y = "Furniture Category",
+       title = "Ikea furniture prices by category") +
+  theme_bw()
+
+```
+
+
+```{r}
+# Finally, let's use the Maize palette
+
+ikea.csv %>% 
+  ggplot(., aes(y = category, x = price)) +
+  geom_boxplot() +
+  geom_point(alpha = 0.2, size = 1, aes(color = sellable_online)) +
+  geom_point(data = ikea.csv %>% 
+               group_by(category) %>% 
+               summarise(avg_price = mean(price)), 
+             aes(y = category, x = avg_price), color = "red") + 
+  scale_color_manual(values = maize_pal("Sweetest"), name = "Other colors") +
+  labs(x = "Price in USD",
+       y = "Furniture Category",
+       title = "Ikea furniture prices by category") +
+  theme_bw()
+```
+
