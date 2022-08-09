@@ -49,16 +49,16 @@ library(ggpubr)
 library(ggrepel)
 
 openwheels %>%
-  # slice_head(n=20) %>%
+  slice_head(n=20) %>%
   ggplot(., aes(y = diameter, x = height)) +
   geom_smooth(method = "lm", color = "black") +
   # geom_label(data = openwheels %>% slice_head(n=5), aes(label = country)) +
-  geom_label_repel(data = openwheels %>% slice_head(n=28), aes(label = country), alpha = 0.9, size = 3) +
+  geom_label_repel(data = openwheels %>% slice_head(n=20), aes(label = country), alpha = 0.9, size = 3) +
   geom_point(aes(color = ride_duration_minutes), size = 5, alpha = 0.9) +
   scale_color_gradient(low = mycols[3], high =  mycols[8]) +
   guides(color = guide_colorbar(title = "Ride duration in minutes", direction = "horizontal",
                                 barwidth = 10, barheight = 0.5, title.position = "top")) +
-  labs(x = "Height", y = "Diameter") +
+  labs(x = "Height", y = "Diameter", title = "Top 20 tallest Ferris Wheels") +
   stat_cor(label.y = 490, aes(label =  ..rr.label..), size = 3) +
   stat_regline_equation(label.y = 460, size = 3) +
   theme_bw() +
