@@ -46,21 +46,29 @@ scales::show_col(mycols)
 
 # "#FFEBC6"
 library(ggpubr)
+library(ggrepel)
 
 openwheels %>%
-  slice_head(n=20) %>%
+  # slice_head(n=20) %>%
   ggplot(., aes(y = diameter, x = height)) +
   geom_smooth(method = "lm", color = "black") +
-  geom_point(aes(color = ride_duration_minutes), size = 4, alpha = 0.9) +
+  # geom_label(data = openwheels %>% slice_head(n=5), aes(label = country)) +
+  geom_label_repel(data = openwheels %>% slice_head(n=28), aes(label = country), alpha = 0.9, size = 3) +
+  geom_point(aes(color = ride_duration_minutes), size = 5, alpha = 0.9) +
   scale_color_gradient(low = mycols[3], high =  mycols[8]) +
   guides(color = guide_colorbar(title = "Ride duration in minutes", direction = "horizontal",
                                 barwidth = 10, barheight = 0.5, title.position = "top")) +
   labs(x = "Height in meters", y = "Diameter in meters") +
-  stat_cor(label.y = 490, aes(label =  ..rr.label..)) +
-  stat_regline_equation(label.y = 460) +
-  theme_minimal() +
+  stat_cor(label.y = 490, aes(label =  ..rr.label..), size = 3) +
+  stat_regline_equation(label.y = 460, size = 3) +
+  theme_bw() +
   theme(legend.position = c(0.8, 0.1),
-        legend.box.background = element_rect(color = "grey"))
+        legend.box.background = element_rect(color = "grey"),
+        panel.border = element_blank())
+
+ggsave("2022/2022-08-09/wheels.png")
 
 
-# Then, map where these top 20 wheels are located.
+
+
+
