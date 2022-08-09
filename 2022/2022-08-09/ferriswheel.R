@@ -58,7 +58,7 @@ openwheels %>%
   scale_color_gradient(low = mycols[3], high =  mycols[8]) +
   guides(color = guide_colorbar(title = "Ride duration in minutes", direction = "horizontal",
                                 barwidth = 10, barheight = 0.5, title.position = "top")) +
-  labs(x = "Height in meters", y = "Diameter in meters") +
+  labs(x = "Height", y = "Diameter") +
   stat_cor(label.y = 490, aes(label =  ..rr.label..), size = 3) +
   stat_regline_equation(label.y = 460, size = 3) +
   theme_bw() +
